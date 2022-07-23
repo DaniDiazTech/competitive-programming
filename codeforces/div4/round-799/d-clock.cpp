@@ -1,27 +1,66 @@
 // D. The clock
-//  Not accepted
+//  Accepted
 // https://codeforces.com/contest/1692/problem/D
 
 #include <bits/stdc++.h>
 
 using namespace std;
 
+bool is_palindrome(int hh, int mm){
+  string rmm = to_string(mm);
+  string rhh = to_string(hh);
 
-bool is_palindrome(string hh, string mm){
-  string rmm = mm;
+  if (rmm.size() < 2){
+    rmm = '0' + rmm;
+  }
+  
+  if (rhh.size() < 2){
+    rhh = '0' + rhh;
+  }
+
   reverse(rmm.begin(), rmm.end());
 
-  if (rmm == hh) return 1;
+  if (rmm == rhh) return 1;
   return 0;
 }
 
 // Solution
 void solve(){
-  int hh, mm, s;
+  int hh, mm, x;
   char aux; 
-  cin >> hh >> aux >> mm >> s;
+  cin >> hh >> aux >> mm >> x;
 
+  int hourdiff = x / 60;
+  int mindiff = x % 60;
 
+  set<pair<int, int>> palindromes;
+
+  int ihh, imm; 
+  ihh = imm = -1;
+
+  while (ihh != hh || imm != mm){
+    if (ihh == -1 && imm  == -1){
+      ihh = hh;
+      imm = mm;
+    }
+
+    
+    ihh += hourdiff;
+    imm += mindiff;
+    
+
+    if (imm >= 60){
+      ihh += 1;
+      imm -= 60;
+    }
+    ihh = ihh % 24;
+
+    if (is_palindrome(ihh, imm)){
+      palindromes.insert(make_pair(ihh, imm));
+    }
+  }
+
+  cout << palindromes.size() << endl;
 }
 
 int main() {
