@@ -1,6 +1,6 @@
-// Problem name
+// D. The clock
 // Accepted/ Not accepted
-// link to problem
+// https://codeforces.com/contest/1692/problem/D
 
 #include <bits/stdc++.h>
 
