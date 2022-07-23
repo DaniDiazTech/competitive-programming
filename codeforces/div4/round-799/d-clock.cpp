@@ -1,15 +1,27 @@
 // D. The clock
-// Accepted/ Not accepted
+//  Not accepted
 // https://codeforces.com/contest/1692/problem/D
 
 #include <bits/stdc++.h>
 
 using namespace std;
 
+
+bool is_palindrome(string hh, string mm){
+  string rmm = mm;
+  reverse(rmm.begin(), rmm.end());
+
+  if (rmm == hh) return 1;
+  return 0;
+}
+
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  int hh, mm, s;
+  char aux; 
+  cin >> hh >> aux >> mm >> s;
+
+
 }
 
 int main() {
