@@ -1,8 +1,8 @@
 /*
-Problem name: 
-Algorithm or Logic:
-Complexity: 
-Link:
+Problem name: Way too long words
+Algorithm or Logic: If len of the work > 10, print the first ch, the len - 2, and last ch
+Complexity: O(1)
+Link: https://codeforces.com/problemset/problem/71/A
 More info: 
 */
 
@@ -12,16 +12,23 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define int long long int
-#define double long double
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  string word;
+  cin >> word;
+  int len = word.size();
+  
+  if (len > 10){
+    string ans = word[0] + to_string(len - 2) + word[len - 1];
+    cout << ans << endl;
+  }
+  else {
+   cout << word << endl; 
+  }
 }
 
-int32_t main() {
+int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0); cout.tie(0);
   

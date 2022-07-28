@@ -145,4 +145,5 @@ dmypy.json
 cython_debug/
 
 # Cpp stuff
-.out
+*.out
+*.txt

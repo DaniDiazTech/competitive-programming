@@ -1,8 +1,8 @@
 /*
-Problem name: 
-Algorithm or Logic:
-Complexity: 
-Link:
+Problem name: Team
+Algorithm or Logic: Given 3 binary numbers return 1 if 2 or more are 1, else 0
+Complexity: O(1) 
+Link: https://codeforces.com/problemset/problem/231/A
 More info: 
 */
 
@@ -12,16 +12,18 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define int long long int
-#define double long double
 
 // Solution
-void solve(){
-  int n;
-  cin >> n;
+int solve(){
+  int a, b, c;
+  cin >> a >> b >> c;
+  
+  int s = a + b + c;
+
+  return (s >= 2) ? 1: 0;
 }
 
-int32_t main() {
+int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0); cout.tie(0);
   
@@ -38,10 +40,14 @@ int32_t main() {
   int tc;
   cin >> tc;
 
+  int counter = 0;
+
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
-    solve();
+    counter += solve();
   }
+
+  cout << counter << endl;
 
   return 0;
 }

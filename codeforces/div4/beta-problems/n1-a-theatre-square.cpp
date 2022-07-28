@@ -1,8 +1,8 @@
 /*
-Problem name: 
-Algorithm or Logic:
+Problem name: Theatre Square
+Algorithm or Logic: Analyze x and y axis separately
 Complexity: 
-Link:
+Link: https://codeforces.com/problemset/problem/1/A
 More info: 
 */
 
@@ -12,13 +12,16 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define int long long int
+#define int long long
 #define double long double
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  double n, m, a;
+  cin >> n >> m >> a;
+
+  int ans = ceil(n / a) * ceil(m / a);
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -35,8 +38,7 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc;
-  cin >> tc;
+  int tc = 1;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

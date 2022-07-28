@@ -1,6 +1,6 @@
-// Problem name
+// Binary Deque
 // Accepted/ Not accepted
-// link to problem
+// https://codeforces.com/contest/1692/problem/E
 
 #include <bits/stdc++.h>
 
