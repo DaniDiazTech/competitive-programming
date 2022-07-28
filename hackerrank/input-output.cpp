@@ -1,8 +1,8 @@
 /*
-Problem name: 
+Problem name: Input and Output
 Algorithm or Logic:
 Complexity: 
-Link:
+Link: https://www.hackerrank.com/challenges/cpp-input-and-output/problem?isFullScreen=true
 More info: 
 */
 
@@ -17,8 +17,11 @@ using namespace std;
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  int a, b, c;
+  cin >> a >> b >> c;
+
+  int s = a + b + c;
+  cout << s << endl;
 }
 
 int32_t main() {
@@ -35,8 +38,7 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc;
-  cin >> tc;
+  int tc = 1;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
