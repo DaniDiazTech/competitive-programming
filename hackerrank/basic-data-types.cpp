@@ -2,7 +2,7 @@
 Problem name: 
 Algorithm or Logic:
 Complexity: 
-Link:
+Link: y
 More info: 
 */
 
@@ -12,16 +12,17 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define int long long int
-#define double long double
-#define MAX LLONG_MAX
-#define MIN LLONG_MIN
-
 
 // Solution
 void solve(){
   int n;
-  cin >> n;
+  long m;
+  char ch;
+  float fl;
+  double dl;
+
+  scanf("%d %ld %c %f %lf", &n, &m, &ch, &fl, &dl);
+  printf("%d\n%ld\n%c\n%.3f\n%.9lf", n, m, ch, fl, dl);
 }
 
 int32_t main() {
@@ -38,8 +39,7 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc;
-  cin >> tc;
+  int tc = 1;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

@@ -14,14 +14,31 @@ using namespace std;
 #define endl '\n'
 #define int long long int
 #define double long double
-#define MAX LLONG_MAX
-#define MIN LLONG_MIN
-
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+
+  string s;
+  cin >> s;
+
+  int countl, countr;
+  countl = countr = 0;
+
+  for (int i = 0; i < 3; i++){
+    char j = s[i];
+    int x = j - '0';
+    countl += x;
+  }
+
+  for (int i = 3; i < 6; i++){
+    char j = s[i];
+    int r = j - '0';
+    countr += r;
+  }
+
+  string ans = (countl == countr) ? "YES": "NO";
+
+  cout << ans << endl;
 }
 
 int32_t main() {

@@ -12,16 +12,29 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define int long long int
+// #define int long long int
 #define double long double
-#define MAX LLONG_MAX
-#define MIN LLONG_MIN
-
 
 // Solution
 void solve(){
   int n;
   cin >> n;
+
+  vector<int> arr;
+  int count = 0;
+
+  for (int i = 0; i < n; i++){
+    int x;
+    cin >> x;
+    arr.push_back(x);
+  }
+
+  int m = *min_element(arr.begin(), arr.end());
+
+  for (int i = 0; i < n; i++){
+    count += arr[i] - m;
+  }
+  cout << count << endl;
 }
 
 int32_t main() {

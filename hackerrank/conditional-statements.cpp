@@ -1,8 +1,8 @@
 /*
-Problem name: 
+Problem name: Conditional statements
 Algorithm or Logic:
 Complexity: 
-Link:
+Link: https://www.hackerrank.com/challenges/c-tutorial-conditional-if-else/
 More info: 
 */
 
@@ -12,16 +12,21 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define int long long int
-#define double long double
-#define MAX LLONG_MAX
-#define MIN LLONG_MIN
-
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  unordered_map<int, string> mp;
+  mp = {{1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}, {5, "five"}, {6,  "six"}, {7, "seven"}, {8, "eight"}, {9, "nine"}};
+
+  int x;
+  cin >> x;
+
+  if (x > 9){
+    cout << "Greater than 9" << endl; 
+  }
+  else{
+    cout << mp[x] << endl;
+  }
 }
 
 int32_t main() {
@@ -38,8 +43,7 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc;
-  cin >> tc;
+  int tc = 1;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

@@ -17,11 +17,35 @@ using namespace std;
 #define MAX LLONG_MAX
 #define MIN LLONG_MIN
 
-
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  int n, m;
+  cin >> n >> m;
+  string arr[n];
+
+  for (int i = 0; i < n; i++) cin >> arr[i];
+
+  int mn  = MAX;
+
+  for (int i = 0; i < n; i++){
+    for (int j = (i + 1); j < n; j++){
+      if (j > (n - 1)) break;
+      int difference = 0;
+
+      for (int in = 0; in < m; in++){
+        int x =  arr[i][in] - arr[j][in];
+        x = abs(x);
+
+        difference += x;
+      }
+
+      if (difference < mn){
+        mn = difference;
+      }
+    }
+  }
+
+  cout << mn << endl;
 }
 
 int32_t main() {

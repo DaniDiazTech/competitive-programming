@@ -1,8 +1,8 @@
 /*
-Problem name: 
+Problem name: Welcome to At coder
 Algorithm or Logic:
 Complexity: 
-Link:
+Link:https://atcoder.jp/contests/practice/tasks/practice_1
 More info: 
 */
 
@@ -14,14 +14,16 @@ using namespace std;
 #define endl '\n'
 #define int long long int
 #define double long double
-#define MAX LLONG_MAX
-#define MIN LLONG_MIN
-
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  int a, b, c;
+  cin >> a >> b >> c;
+
+  string s;
+  cin >> s;
+  int su = a + b + c;
+  cout << su << " " << s << endl; 
 }
 
 int32_t main() {
@@ -38,8 +40,7 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc;
-  cin >> tc;
+  int tc = 1;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

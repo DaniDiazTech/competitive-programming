@@ -1,8 +1,8 @@
 /*
-Problem name: 
+Problem name: YES or YES
 Algorithm or Logic:
 Complexity: 
-Link:
+Link: https://codeforces.com/contest/1703/problem/A
 More info: 
 */
 
@@ -14,14 +14,13 @@ using namespace std;
 #define endl '\n'
 #define int long long int
 #define double long double
-#define MAX LLONG_MAX
-#define MIN LLONG_MIN
-
 
 // Solution
 void solve(){
-  int n;
-  cin >> n;
+  string s;
+  cin >> s; 
+  transform(s.begin(), s.end(), s.begin(), ::toupper);
+  cout << ((s == "YES") ? "YES" : "NO") << endl;
 }
 
 int32_t main() {
