@@ -3,7 +3,7 @@ Problem name:
 Algorithm or Logic:
 Complexity: 
 Link:
-More info: 
+More info: Solved
 */
 
 #include <bits/stdc++.h>
@@ -28,14 +28,30 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
+int arr[MAX];
 
  // Solution
 void solve(){
-  int n,m,k;
-  string s;
+  int n, m;
+  cin >> n >> m;
 
-  cin >> n;
+  if (m > n){
+    swap(m, n);
+  }
+
+  if (m == 1 && n > 2){
+    cout << -1 << endl; return;
+  }
+
+  int ans;
+  if ((n + m) % 2){
+    ans = 2 * n - 3; 
+  }
+  else{
+    ans = 2 * n - 2;
+  }
+
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -52,7 +68,7 @@ int32_t main() {
 
   // Testscases
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

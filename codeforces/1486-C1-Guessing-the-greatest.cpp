@@ -11,7 +11,7 @@ More info:
 using namespace std;
 
 // Templates
-#define endl '\n'
+// #define endl '\n'
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define int long long int
 #define double long double
@@ -36,6 +36,14 @@ void solve(){
   string s;
 
   cin >> n;
+  int l = 1, r  = n, mid;
+
+  while (l < r){
+    cout << "? " << l << " " << r << endl;
+    cin >> mid;
+
+    if (mid > n)
+  } 
 }
 
 int32_t main() {

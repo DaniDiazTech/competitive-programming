@@ -28,14 +28,13 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
 
  // Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
+
+  
 }
 
 int32_t main() {

@@ -12,7 +12,6 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define int long long int
 #define double long double
 #define pb push_back
@@ -22,25 +21,45 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e6;
+const int MAX = 2 * 1e5;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
+int arr[MAX];
 
  // Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
+
+  bool notok = true;
+
+  unordered_map<int, int> mp;
+  
+  for (int i = 0; i < n; i++) cin >> arr[i];
+
+  
+  for (int i = 0; i < n; i++){
+    mp[arr[i]]++; 
+  }
+
+  for (auto const& x: mp){
+    if (x.ss >= 3){
+      notok = false;
+      cout << x.ff << endl;
+      break;
+    } 
+  }
+
+  if (notok) cout << -1 << endl;
 }
 
 int32_t main() {
-  fastInp;
-
+  ios_base::sync_with_stdio(0);
+  cin.tie(0); cout.tie(0);
+  
   // Only local using my exc command.
   #if LOCAL
       // For getting input from input.txt file
@@ -51,8 +70,8 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc = 1;
-  // cin >> tc;
+  int tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
