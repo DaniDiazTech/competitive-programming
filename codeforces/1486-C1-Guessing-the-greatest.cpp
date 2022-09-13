@@ -12,51 +12,71 @@ using namespace std;
 
 // Templates
 // #define endl '\n'
-#define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define int long long int
 #define double long double
-#define pb push_back
-#define ff first
-#define ss second
-#define mk make_pair
+#define MAX LLONG_MAX
+#define MIN LLONG_MIN
 
-typedef pair<int, int> pii;
+int ask(int l, int r){
+  if (l == r) return -1;
+  cout << "? " << l << " " << r << endl;
+  int x;
+  cin >> x;
+  return x;
+}
 
-const int MAX = 1e6;
-const int MIN = -MAX;
-const int INF = LLONG_MAX;
-const int MINF = LLONG_MIN;
-const int MOD = 1e9 + 7;
-
-// int arr[MAX];
-
- // Solution
+// Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
-  int l = 1, r  = n, mid;
 
-  while (l < r){
-    cout << "? " << l << " " << r << endl;
-    cin >> mid;
+  int l = 1, r = n;
 
-    if (mid > n)
-  } 
+  while (r > l){
+    int mid = (r + l) >> 1;
+
+    int fq = ask(l, r);
+
+    if (fq <= mid){
+      int sq = ask(l, mid);
+      if (fq == sq){
+        // Share region
+        r = mid;
+      }
+      else{
+        // Not share region
+        l = mid + 1;
+      }
+    }
+    else{
+      // Second greatest to the right
+      int sq = ask(mid + 1, r);
+      if (sq == fq){
+        // Share region
+        l = mid + 1;
+      } 
+      else{
+        // Not share region
+        r = mid;
+      }
+    }
+  }
+
+  cout << "! " << l << endl;
 }
 
 int32_t main() {
-  fastInp;
-
+  ios_base::sync_with_stdio(0);
+  cin.tie(0); cout.tie(0);
+  
   // Only local using my exc command.
-  #if LOCAL
-      // For getting input from input.txt file
-    freopen("input.txt", "r", stdin);
+  // #if LOCAL
+  //     // For getting input from input.txt file
+  //   freopen("input.txt", "r", stdin);
 
-    // Printing the Output to output.txt file
-    freopen("output.txt", "w", stdout);
-  #endif
+  //   // Printing the Output to output.txt file
+  //   freopen("output.txt", "w", stdout);
+  // #endif
 
   // Testscases
   int tc = 1;
