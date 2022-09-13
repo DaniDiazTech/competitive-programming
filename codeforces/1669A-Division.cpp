@@ -12,7 +12,6 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define int long long int
 #define double long double
 #define pb push_back
@@ -28,19 +27,32 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
+int arr[MAX];
 
  // Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
+
+  int div = 4;
+
+  if (1400 <= n and n<= 1599){
+    div = 3;
+  }
+  else if (1600 <= n and n <= 1899){
+    div = 2;
+  }
+  else if (n >= 1900){
+    div = 1;
+  }
+
+  cout << "Division " << div << endl;
 }
 
 int32_t main() {
-  fastInp;
-
+  ios_base::sync_with_stdio(0);
+  cin.tie(0); cout.tie(0);
+  
   // Only local using my exc command.
   #if LOCAL
       // For getting input from input.txt file
@@ -51,8 +63,8 @@ int32_t main() {
   #endif
 
   // Testscases
-  int tc = 1;
-  // cin >> tc;
+  int tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

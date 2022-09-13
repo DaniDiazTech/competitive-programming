@@ -28,13 +28,11 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
+int arr[MAX];
 
  // Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
 }
 
@@ -52,7 +50,7 @@ int32_t main() {
 
   // Testscases
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

@@ -12,7 +12,6 @@ using namespace std;
 
 // Templates
 #define endl '\n'
-#define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define int long long int
 #define double long double
 #define pb push_back
@@ -28,19 +27,65 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
-
- // Solution
+// Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
+
+  pair<string, int> arr[n];
+
+  unordered_map<string, int> mp;
+  unordered_map<string, int> finalmp;
+
+  vector<string> winners;
+
+
+  for (int i = 0; i < n; i++){
+    string s;
+    int x;
+    cin >> s >> x;
+    arr[i] = {s, x};  
+    mp[s] = mp[s] + x;
+  }
+  
+  int mx = MIN;
+
+  for (auto& x: mp){
+    if (x.ss > mx){
+      mx = x.ss;
+    }
+  }
+
+  for (auto& x: mp){
+    if (x.ss == mx){
+      winners.pb(x.ff);
+    }
+  }
+  bool ok = 1;
+
+  for  (int i = 0; i < n; i++){
+    if (!ok) break;
+
+    string s = arr[i].ff;
+    int x = arr[i].ss;
+    finalmp[s] = finalmp[s] + x;
+
+    if (finalmp[s] >= mx){
+      for (auto w: winners){
+        if (s == w){
+          ok = 0;
+          cout << s << endl;
+          break;
+        }
+      }
+    }
+  }
 }
 
 int32_t main() {
-  fastInp;
-
+  ios_base::sync_with_stdio(0);
+  cin.tie(0); cout.tie(0);
+  
   // Only local using my exc command.
   #if LOCAL
       // For getting input from input.txt file
@@ -52,7 +97,6 @@ int32_t main() {
 
   // Testscases
   int tc = 1;
-  // cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
