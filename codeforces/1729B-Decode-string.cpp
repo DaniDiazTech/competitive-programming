@@ -1,5 +1,4 @@
 /*
-Made by Daniel Diaz (Danidiaztech)
 Problem name: 
 Algorithm or Logic:
 Complexity: 
@@ -15,7 +14,7 @@ using namespace std;
 #define endl '\n'
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define forn(i, n) for (int i = 0; i < n; i++) // for in range in python
-#define int long long int
+// #define int long long int
 #define double long double
 #define pb push_back
 #define ff first
@@ -26,18 +25,37 @@ typedef pair<int, int> pii;
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int INF = LLONG_MAX;
-const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 
  // Solution
 void solve(){
-  int n,m,k;
+  int n;
   string s;
+  cin >> n >> s;
+  char a = 'a';
 
-  cin >> n;
+  // accessb, accesse, cmp 
+  reverse(s.begin(), s.end());
+  string ans = "";
+
+  for (int i = 0; i < n; i++){
+    int x = stoi(s.substr(i, 1));
+    
+    if (x == 0){
+      string l = s.substr(i + 1, 2);
+      reverse(l.begin(), l.end());
+      x = stoi(l);
+      ans += (x + int(a) - 1); // ascii
+      i += 2;
+    }
+    else{
+      ans += (x + int(a) - 1);
+    }
+  }
+  reverse(ans.begin(), ans.end());
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -54,7 +72,7 @@ int32_t main() {
 
   // Testscases
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

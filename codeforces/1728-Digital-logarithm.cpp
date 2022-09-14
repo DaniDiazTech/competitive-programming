@@ -1,5 +1,4 @@
 /*
-Made by Daniel Diaz (Danidiaztech)
 Problem name: 
 Algorithm or Logic:
 Complexity: 
@@ -31,13 +30,47 @@ const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 // int arr[MAX];
-
+int dl(int n){
+  return to_string(n).size();
+}
  // Solution
 void solve(){
-  int n,m,k;
-  string s;
-
+  int n;
   cin >> n;
+
+  priority_queue<int> qa;
+  priority_queue<int> qb;
+
+  forn(i, n){
+    int x;
+    cin >> x;
+    qa.push(x);
+  }
+  forn(i, n){
+    int x;
+    cin >> x;
+    qb.push(x);
+  }
+  int ans = 0;
+  while (!qa.empty()){
+    if (qa.top() == qb.top()){
+      qa.pop(); qb.pop();
+      continue;
+    }
+    ans++;
+    if (qa.top() > qb.top()){
+      int d = dl(qa.top());
+      qa.pop();
+      qa.push(d);
+    }
+    else{
+      int d = dl(qb.top());
+      qb.pop();
+      qb.push(d);
+    }
+  } 
+
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -54,7 +87,7 @@ int32_t main() {
 
   // Testscases
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

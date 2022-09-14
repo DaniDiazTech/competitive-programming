@@ -1,5 +1,4 @@
 /*
-Made by Daniel Diaz (Danidiaztech)
 Problem name: 
 Algorithm or Logic:
 Complexity: 
@@ -35,9 +34,19 @@ const int MOD = 1e9 + 7;
  // Solution
 void solve(){
   int n,m,k;
-  string s;
 
-  cin >> n;
+  cin >> n >> m >> k;
+
+  int op = abs(m - k) + k;
+  if (op == n){
+    cout << 3 << endl;
+  }
+  else if (op > n){
+    cout << 1 << endl;
+  }
+  else{
+    cout << 2 << endl;
+  }
 }
 
 int32_t main() {
@@ -54,7 +63,7 @@ int32_t main() {
 
   // Testscases
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
