@@ -15,17 +15,27 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e6;
+const int MAX = 2 * 1e5 + 10;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
+int arr[MAX];
 void solve(){
-  int n,m,k;
-  string s;
+  int n;
   cin >> n;
+
+  forn(i, n - 1){
+    int x; cin >> x;
+    arr[x] = 1;
+  }
+  FOR(i, 1, n + 1){
+    if (!arr[i]){
+      cout << i << endl;
+      break;
+    }
+  }
 }
 
 int32_t main() {

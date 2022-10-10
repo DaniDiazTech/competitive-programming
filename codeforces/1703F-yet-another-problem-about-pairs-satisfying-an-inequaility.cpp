@@ -3,7 +3,7 @@ Problem name:
 Algorithm or Logic:
 Complexity: 
 Link:
-More info: 
+More info: Unsolved
 */
 
 #include <bits/stdc++.h>
@@ -14,42 +14,38 @@ using namespace std;
 #define endl '\n'
 #define int long long int
 #define double long double
+#define ff first
+#define ss second
+#define pb push_back
+
+const int MAX = 1e6;
+const int MIN = 0;
+const int INF = LLONG_MAX;
+const int MINF = LLONG_MIN;
+
 
 // Solution
 void solve(){
-  // 0 to 9
   int n;
   cin >> n;
 
-  // arr[i] 0 to 9
-  int arr[n];
+  vector<pair<int, int>> arr;
 
-  for (int i = 0; i < n; i++) cin >> arr[i];
+  for (int i = 1; i <= n; i++){
+    int x;
+    cin >> x;
+    if (i > x){
+      arr.pb(make_pair(x, i));
+    }
+  }
+
+  int count = 0;
+
+  int size = arr.size();
+
   
-  for (int i = 0; i < n; i++){
-    int b;
-    cin >> b;
-    // moves
-    string s;
-    cin >> s;
 
-    int finalmoves = 0;
-    for (char ch: s) finalmoves += (ch == 'U') ? -1 : 1;
-    arr[i] += finalmoves;
-
-    if (arr[i] > 9){
-      arr[i] -= 10;
-    }
-    else if (arr[i] < 0){
-      arr[i] += 10; 
-    }
-  }
-
-  for (auto j: arr){
-    cout << j << " ";
-  }
-
-  cout << endl;
+  cout << count << endl;
 }
 
 int32_t main() {

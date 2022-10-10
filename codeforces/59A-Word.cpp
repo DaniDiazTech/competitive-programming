@@ -5,7 +5,6 @@ using namespace std;
 #define endl '\n'
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define forn(i, n) for (int i = 0; i < n; i++) // for in range in python
-#define FOR(i, a, b) for (int i = a; i < b; i++) // for in range in python
 #define int long long int
 #define double long double
 #define pb push_back
@@ -23,9 +22,22 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n,m,k;
+  
   string s;
-  cin >> n;
+  cin >> s;
+  int n = s.size();
+  int l = 0, u= 0;
+  forn(i,n){
+    if (isupper(s[i])){
+      u++;
+    }
+    else l++;
+  }
+
+  forn(i,n){
+    if (l >= u) cout << (char)tolower(s[i]);
+    else  cout << (char)toupper(s[i]);
+  }
 }
 
 int32_t main() {

@@ -22,10 +22,18 @@ const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 // int arr[MAX];
+
 void solve(){
-  int n,m,k;
-  string s;
-  cin >> n;
+  int a, b;
+  cin >> a >> b;
+  if (max(a, b) <= 2 * min(a,  b)){
+    if (max(a, b) == 2 * min(a,  b) || (a + b) % 3 == 0){
+      cout << "YES";
+    }
+    else cout <<  "NO";
+  }
+  else cout <<  "NO";
+  cout << endl;
 }
 
 int32_t main() {
@@ -36,7 +44,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

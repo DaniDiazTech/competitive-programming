@@ -23,9 +23,20 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n,m,k;
-  string s;
-  cin >> n;
+  string s; cin >> s;
+  int mx = MINF;
+  int cnt = 1;
+  FOR(i, 0, (int)s.size() - 1){
+    if (s[i] == s[i + 1]){
+      cnt++;
+    }
+    else{
+      mx = max(cnt, mx);
+      cnt  = 1;
+    }
+  }
+  mx = max(cnt, mx);
+  cout << mx << endl;
 }
 
 int32_t main() {
