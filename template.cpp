@@ -23,8 +23,7 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n,m,k;
-  string s;
+  int n;
   cin >> n;
 }
 

@@ -5,6 +5,7 @@ using namespace std;
 #define endl '\n'
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define forn(i, n) for (int i = 0; i < n; i++) // for in range in python
+#define FOR(i, a, b) for (int i = a; i < b; i++) // for in range in python
 #define int long long int
 #define double long double
 #define pb push_back
@@ -20,21 +21,30 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
+// Generate subsets, in this case multisets
+void search(int k, int n, int sum, int &min, vector<int> &v, vector<int> &aux){
+  if (k == n + 1){
+    // process
+    
+  }
+}
+
 // int arr[MAX];
 void solve(){
-  int n;
+  int n, s = 0;
   cin >> n;
-  // odd then even 
-  if (n ==  2 || n == 3){
-    cout <<  "NO SOLUTION";
-    return;
+  int a[n];
+  forn(i, n){
+    cin >> a[i]; 
+    s += a[i];
   }
+  s /= 2;
 
-  for (int i = 2; i <= n; i += 2){
-    cout << i <<  " ";
-  }
-  for (int i = 1; i <= n; i += 2){
-    cout << i << " ";
+  int diff = INF;
+  for (int i = 0; i < n; i++){
+    for (int j = 0; i < n; i++){
+      if (i == j) continue;
+    }
   }
 }
 

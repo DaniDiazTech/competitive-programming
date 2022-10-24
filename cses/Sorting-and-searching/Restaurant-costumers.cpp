@@ -22,19 +22,58 @@ const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 // int arr[MAX];
+void solve_two_pointers(){
+  int n;
+  cin >> n;
+  int a[n], b[n];
+  forn(i, n){
+    cin >> a[i] >> b[i];
+  }
+  sort(a, a + n);
+  sort(b, b + n);
+
+  int best = 0;
+  int cnt = 0;
+  int i = 0, j = 0;
+
+  for (i = 0; i < n; i++){
+    cnt++;
+    while (a[i] >= b[j]){
+      cnt--;
+      j++;
+    }
+    best = max(cnt, best);
+  }
+  cout << best << endl;
+}
 
 void solve(){
-  int a, b;
-  cin >> a >> b;
-  if (max(a, b) <= 2 * min(a,  b)){
-    if (max(a, b) == 2 * min(a,  b) || (a + b) % 3 == 0){
-      cout << "YES";
-    }
-    else cout <<  "NO";
+  int n;
+  cin >> n;
+  vector<pair<int, int>> a;
+
+  forn(i, n){
+    int start, end;
+    cin >> start >> end;
+    // Adds one if we hit the time when a person
+    // enters the restaurant
+    a.pb({start, 1});
+
+    // Decreases one if we hit the leave time
+    // of a costumer
+    a.pb({end, -1});
   }
-  else cout <<  "NO";
-  cout << endl;
+  sort(a.begin(), a.end());
+  int cnt, best;
+  cnt  = best  = 0;
+  for (auto x: a){
+    cnt += x.second; 
+    best = max(best, cnt);
+  }
+  cout << best << endl;
+
 }
+
 
 int32_t main() {
   fastInp;
@@ -44,7 +83,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  cin >> tc;
+  // cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

@@ -5,6 +5,7 @@ using namespace std;
 #define endl '\n'
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define forn(i, n) for (int i = 0; i < n; i++) // for in range in python
+#define FOR(i, a, b) for (int i = a; i < b; i++) // for in range in python
 #define int long long int
 #define double long double
 #define pb push_back
@@ -24,14 +25,26 @@ const int MOD = 1e9 + 7;
 void solve(){
   int n;
   cin >> n;
-  cout << n << " ";
-  while (n != 1){
-    if (n % 2 == 0){
-      n /= 2;
+  // Position vector
+  vector<int> a(n + 1);
+  FOR(i, 1, n + 1){
+    int x; cin >> x;
+    a[x] = i;
+  }
+
+  // for (auto x: a) cout << x << ' ';
+  // cout << endl;
+
+  int rounds = 1;
+
+  for (int i = 1; i <=  n; i++){
+    if (i+1 > n) break;
+    if (a[i] > a[i + 1 ]){
+      // Can't continue
+      rounds++;
     }
-    else n = n *3 + 1;
-    cout << n << " ";
-  } 
+  }
+  cout << rounds << endl;
 }
 
 int32_t main() {

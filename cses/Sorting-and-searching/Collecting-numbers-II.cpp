@@ -23,20 +23,32 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  string s; cin >> s;
-  int mx = MINF;
-  int cnt = 1;
-  FOR(i, 0, (int)s.size() - 1){
-    if (s[i] == s[i + 1]){
-      cnt++;
-    }
-    else{
-      mx = max(cnt, mx);
-      cnt  = 1;
-    }
+  int n, m;
+  cin >> n >> m;
+  // Position vector
+  vector<int> a(n + 1);
+  // Value map
+  map<int, int> mp;
+  FOR(i, 1, n + 1){
+    int x; cin >> x;
+    a[x] = i;
+    mp[i] = x;
   }
-  mx = max(cnt, mx);
-  cout << mx << endl;
+
+  while (m--){
+    // Swap positions
+    int x, y; cin >> x >> y;
+    swap(a[mp[x]], a[mp[y]]);
+    int rounds = 1;
+    for (int i = 1; i <=  n; i++){
+      if (i+1 > n) break;
+      if (a[i] > a[i + 1 ]){
+        // Can't continue
+        rounds++;
+      }
+    }
+    cout << rounds << endl;
+  }
 }
 
 int32_t main() {
