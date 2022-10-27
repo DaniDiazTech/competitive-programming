@@ -26,27 +26,42 @@ void solve(){
   int n, m;
   cin >> n >> m;
   // Position vector
-  vector<int> a(n + 1);
+  vector<int> positions(n + 1);
   // Value map
-  map<int, int> mp;
+  vector<int> values(n + 1);
   FOR(i, 1, n + 1){
     int x; cin >> x;
-    a[x] = i;
-    mp[i] = x;
+    positions[x] = i;
+    values[i] = x;
   }
 
+  int rounds = 1;
+  for (int i = 1; i < n; i++)
+    rounds += (positions[i] > positions[i + 1]);
+
   while (m--){
-    // Swap positions
-    int x, y; cin >> x >> y;
-    swap(a[mp[x]], a[mp[y]]);
-    int rounds = 1;
-    for (int i = 1; i <=  n; i++){
-      if (i+1 > n) break;
-      if (a[i] > a[i + 1 ]){
-        // Can't continue
-        rounds++;
-      }
+    int a, b; cin >> a >> b;
+    // Adjacent numbers
+    set<pii> s;
+    if (values[a] - 1 > 0) s.insert({values[a] - 1, values[a]});
+    if (values[a] + 1 <= n) s.insert({values[a], values[a] + 1} );
+    if (values[b] - 1 > 0) s.insert( {values[b] - 1, values[b]} );
+    if (values[b] + 1 <= n) s.insert({values[b], values[b] + 1});
+    // Uncheck inversions
+    for (auto x: s){
+      if (positions[x.first] > positions[x.second]) rounds--;
     }
+
+    // Perform swap
+    swap(values[a], values[b]);
+    positions[values[a]] = a;
+    positions[values[b]] = b;
+    // Check inversions
+    for (auto x: s){
+      if (positions[x.first] > positions[x.second]) rounds++;
+    }
+
+    s.clear();
     cout << rounds << endl;
   }
 }
