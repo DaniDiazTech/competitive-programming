@@ -22,7 +22,7 @@ const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 // int arr[MAX];
-void solve(){
+void solve_1(){
   int n;
   cin >> n;
 
@@ -32,7 +32,7 @@ void solve(){
 
   while (v.size() > 1){
     vector<int> survivors;
-    for (int i = 0 ; i < v.size(); i++){
+    for (int i = 0 ; i < (int)v.size(); i++){
       // Remove second elements, and save survivors
       if (i % 2 == 1){
         cout << v[i] << " ";
@@ -58,6 +58,37 @@ void solve(){
   }
   // Print last element
   cout << v[0];
+}
+
+
+void solve(){
+  int n; cin >> n;
+  vector<int> a;
+  for (int i = 1; i <= n; i++) a.pb(i);
+
+  int cnt  = 0, num = 0, i = 0;
+  while (true){
+    while (!a[i] && i != n  -  1)
+      i++;
+    if (a[i]) cnt++;
+
+    if (cnt == 2){
+      // Keep count of the numbers we've printed
+      num++;
+      cout << a[i] << " ";
+      // Mark the number as visited
+      a[i] = 0;
+      cnt = 0;
+    }
+    // If limit is reached then start from zero
+    if (i == n - 1){
+      i = 0;
+    }
+    else i++;
+
+    // Finish the while loop
+    if (num == n) break;
+  }
 }
 
 int32_t main() {
