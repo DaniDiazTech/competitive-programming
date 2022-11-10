@@ -15,34 +15,50 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e6;
+const int MAX = 2 * 1e5 +10;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
+int a[MAX];
+
 // int arr[MAX];
 void solve(){
-  int n; cin >> n;
-  string a, b; cin >> a >> b;
-  int cnt = 0;
-  int i = 0;
-  while (i < n){
-    if (a[i] != b[i]){
-      int j = i;
-      while (a[j] != b[j]){
-        // cout << a[j] << " " << b[j] << endl;
-        j++;
+  int n, t;
+  cin >> n >> t;
+  forn(i,n) cin >> a[i];
+  // Up to 10E18 in worst case
+  // 1 1e9
+  // 1e9
+  int l = 1, r  = 1e18;
+  int ans = 0; 
+  // Binary search
+  while (l <= r){
+    int mid = (l + r) / 2; 
+    int sum = 0;
+    for (int i = 0; i < n; i++){
+      // Summatory
+      sum += (mid / a[i]);
+      if (sum >= t){
+        // Avoids innecessary addition
+        break;
       }
-      i = j;
-      cnt++;
     }
-    else{
-      i++;
+
+    // cout << mid << endl;
+    if (sum >=  t){
+      // Here the answer is valid
+      // But we want the minimal viable answer
+      // Thus keep iterating
+      ans = mid;
+      r = mid - 1;
     }
-    // cout << i << endl;
+    else {
+      l = mid + 1;
+    }
   }
-  cout << cnt;
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -50,10 +66,6 @@ int32_t main() {
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-  #else
-    freopen("breedflip.in", "r", stdin);
-    freopen("breedflip.out", "w", stdout);
-
   #endif
 
   int tc = 1;

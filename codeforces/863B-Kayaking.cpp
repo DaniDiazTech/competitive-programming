@@ -23,26 +23,37 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n; cin >> n;
-  string a, b; cin >> a >> b;
-  int cnt = 0;
-  int i = 0;
-  while (i < n){
-    if (a[i] != b[i]){
-      int j = i;
-      while (a[j] != b[j]){
-        // cout << a[j] << " " << b[j] << endl;
-        j++;
-      }
-      i = j;
-      cnt++;
-    }
-    else{
-      i++;
-    }
-    // cout << i << endl;
+  int n;
+  cin >> n;
+  int p = 2 * n;
+  int a[p];
+  forn(i, p){
+    cin >> a[i];
   }
-  cout << cnt;
+  sort(a, a + p);
+
+  int ans = INF;
+  for (int i = 0 ; i < p ; i++){
+    // Get the pair
+    for (int j = i + 1; j < p ; j++){
+      // Pair: a[i],  a[j] not included in the sum
+      vector<int> kayak = {};
+      for (int k = 0; k < p; k++){
+        if (k != i && k != j){
+          kayak.pb(a[k]);
+        }
+      }
+      int ines = 0;
+
+      for (int k = 0; k < (int)kayak.size(); k+=2){
+        ines += kayak[k + 1] - kayak[k];
+      }
+      
+    
+      ans = min(ines, ans);
+    }
+  }
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -50,10 +61,6 @@ int32_t main() {
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-  #else
-    freopen("breedflip.in", "r", stdin);
-    freopen("breedflip.out", "w", stdout);
-
   #endif
 
   int tc = 1;
