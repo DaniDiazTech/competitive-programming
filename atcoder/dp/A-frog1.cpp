@@ -21,24 +21,39 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-bool Grid[10][10];
+int dp[MAX + 10];
+int a[MAX + 10];
+int solve(int i) {
+  if (i == 0)
+    return 0;
+  if (i < 0)
+    return INT_MAX;
 
-vector<int> decision;
-// L R U D
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+  if (dp[i] != -1)
+    return dp[i];
+
+  if (i > 1)
+    return dp[i] = min(solve(i - 1) + abs(a[i] - a[i - 1]),
+      solve(i - 2) + abs(a[i] - a[i - 2])
+      );
+  else
+    return dp[i] = solve(i- 1) + abs(a[i] - a[i - 1]);
+}
 
 int32_t main() {
   fastInp;
-  #if LOCAL
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-  #endif
+#if LOCAL
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
+#endif
 
-  string s; cin >> s;
+  int n; cin >> n;
+  memset(dp, -1, sizeof(dp));
+  for (int i = 0; i < n; i++){
+    int x; cin >> x;
+    a[i] = x;
+  }
 
-  for (int i = 0; i < s.size(); i++){
-    ik
-  } 
+  cout << solve(n - 1);
   return 0;
 }

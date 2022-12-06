@@ -25,28 +25,20 @@ const int MOD = 1e9 + 7;
 void solve(){
   int n;
   cin >> n;
-  vector<pii> a;
-  int arr[n];
-  for (int i=1; i <= n; i++){
-    cin >> arr[i];
-    a.pb({arr[i], i});
-  }
-  sort(a.begin(), a.end());
-  for (int i = 0; i < n; i++){
-    // Binary search to find value
-    int search = arr[i] - 1;
-    auto it = lower_bound(a.begin(), a.end(), search,
-    [](const pii &vec, const int &val){
-      return vec.first < val;
-    });
-    // Found a value
-    if (it != a.end()){
-      if ((*it).first < arr[i]){
-        cout << (*it).second << " ";
-        continue;
-      }
+  vector<int> a(n + 1);
+  vector<pii> st;
+  for (int i = 1; i <= n; i++){
+    int x; cin >> x;
+    while (!st.empty()){
+      if (x <= st.back().first)
+        st.pop_back();
+      else break;
+    } 
+    if (st.empty()) cout << "0 ";
+    else{
+      cout << st.back().second << " ";
     }
-    cout << 0 << " ";
+    st.pb({x, i});
   }
 }
 

@@ -21,12 +21,23 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-bool Grid[10][10];
+int a[MAX][3];
+int dp[MAX][3];
+int n;
+int solve(int i, int j){
+  if (n == i)
+    return 0;
 
-vector<int> decision;
-// L R U D
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+  if (dp[i][j] != -1)
+    return dp[i][j];
+  
+  int mx = 0;
+  for (int k = 0; k < 3; k++){
+    if (k != j)
+      mx = dp[i][j] = max(mx, solve(i + 1, k) + a[i][j]);
+  }
+  return dp[i][j];
+}
 
 int32_t main() {
   fastInp;
@@ -35,10 +46,17 @@ int32_t main() {
     freopen("output.txt", "w", stdout);
   #endif
 
-  string s; cin >> s;
+  cin >> n;
+  memset(dp, -1, sizeof(dp));
+  for (int i = 0; i < n; i++){
+    cin >> a[i][0] >> a[i][1] >> a[i][2];
+  }
 
-  for (int i = 0; i < s.size(); i++){
-    ik
-  } 
+  int ans = 0;
+  for (int i = 0; i < 3; i++){
+    ans = max(ans, solve(0, i));
+  }
+  cout << ans << endl;
+
   return 0;
 }

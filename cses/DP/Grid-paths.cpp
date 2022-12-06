@@ -21,24 +21,36 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-bool Grid[10][10];
 
-vector<int> decision;
-// L R U D
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
-
+int dp[1010][1010];
 int32_t main() {
   fastInp;
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
   #endif
+  int n; cin >> n;
+  
+  for (int i = 1; i <= n; i++){
+    for (int j = 1; j <= n; j++){
+      char ch; cin >> ch;
+      if (ch == '*')
+        dp[i][j] = -1;
+    }
+  }
+  dp[1][1] = (dp[1][1] == -1) ? 0: 1;
+  for (int i = 1; i <= n; i++){
+    for (int j = 1; j <= n; j++){
+      // Paths from up and left
+      if (dp[i][j] == -1){
+        dp[i][j] = 0;
+        continue;
+      }
+      dp[i][j] += dp[i][j - 1] + dp[i - 1][j];
+      dp[i][j] %= MOD;
+    }
+  }
+  cout << dp[n][n] << endl;
 
-  string s; cin >> s;
-
-  for (int i = 0; i < s.size(); i++){
-    ik
-  } 
   return 0;
 }

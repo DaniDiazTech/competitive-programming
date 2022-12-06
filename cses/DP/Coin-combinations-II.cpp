@@ -21,12 +21,22 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-bool Grid[10][10];
-
-vector<int> decision;
-// L R U D
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+int dp[MAX + 10];
+vector<int> coins;
+int solve(int x){
+  if (x == 0)
+    return 1;
+  if (x < 0)
+    return 0;
+  if (dp[x] != -1)
+    return 0;
+  
+  int sum = 0; 
+  for (auto c: coins){
+    dp[x] = sum = solve(x - c) + sum;
+  }
+  return sum;
+}
 
 int32_t main() {
   fastInp;
@@ -35,10 +45,13 @@ int32_t main() {
     freopen("output.txt", "w", stdout);
   #endif
 
-  string s; cin >> s;
+  int n, x; cin >> n >> x;
+  memset(dp, -1, sizeof(dp));
+  forn(i,n){
+    int v; cin >> v;
+    coins.pb(v);
+  }
 
-  for (int i = 0; i < s.size(); i++){
-    ik
-  } 
+  cout << solve(x) << endl;
   return 0;
 }

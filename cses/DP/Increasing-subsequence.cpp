@@ -21,12 +21,21 @@ const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-bool Grid[10][10];
-
-vector<int> decision;
-// L R U D
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
+// int arr[MAX];
+void solve(){
+  int n;
+  cin >> n;
+  multiset<int> s;
+  for (int i = 0; i < n; i++){
+    int x; cin >> x;
+    auto it= s.lower_bound(x);
+    if (it != s.end()){
+      s.erase(it);
+    }
+    s.insert(x);
+  }
+  cout << s.size();
+}
 
 int32_t main() {
   fastInp;
@@ -35,10 +44,12 @@ int32_t main() {
     freopen("output.txt", "w", stdout);
   #endif
 
-  string s; cin >> s;
+  int tc = 1;
+  // cin >> tc;
 
-  for (int i = 0; i < s.size(); i++){
-    ik
-  } 
+  for (int t = 1; t <= tc; t++){
+    // cout << "Case #" << t << ": ";
+    solve();
+  }
   return 0;
 }
