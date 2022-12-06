@@ -15,34 +15,21 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e6;
+const int MAX = 12;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-// int arr[MAX];
-void solve(){
-  int n; cin >> n;
-  string a, b; cin >> a >> b;
-  int cnt = 0;
-  int i = 0;
-  while (i < n){
-    if (a[i] != b[i]){
-      int j = i;
-      while (a[j] != b[j]){
-        // cout << a[j] << " " << b[j] << endl;
-        j++;
-      }
-      i = j;
-      cnt++;
+int board[MAX][MAX];
+
+void flip_board(int row, int col){
+  // Flip until the row and column specified
+  for (int i = 0; i <= row; i++){
+    for (int j = 0; j <= col; j++){
+      board[i][j] = !board[i][j];
     }
-    else{
-      i++;
-    }
-    // cout << i << endl;
   }
-  cout << cnt;
 }
 
 int32_t main() {
@@ -51,17 +38,26 @@ int32_t main() {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
   #else
-    freopen("breedflip.in", "r", stdin);
-    freopen("breedflip.out", "w", stdout);
-
+    freopen("cowtip.in", "r", stdin);
+    freopen("cowtip.out", "w", stdout);
   #endif
 
-  int tc = 1;
-  // cin >> tc;
-
-  for (int t = 1; t <= tc; t++){
-    // cout << "Case #" << t << ": ";
-    solve();
+  int n; cin >> n;
+  forn(i,n){
+    string s; cin >> s; 
+    forn(j,n){
+      board[i][j] = s[j] - '0';
+    }
   }
-  return 0;
+  int cnt = 0;
+  // Iterate from n, n up to 0, 0
+  for (int i = n - 1; i >= 0; i--){
+    for (int j = n -1; j >= 0; j--){
+      if (board[i][j] == 1){
+        flip_board(i, j);
+        cnt++;
+      }
+    }
+  }
+  cout << cnt << endl;
 }

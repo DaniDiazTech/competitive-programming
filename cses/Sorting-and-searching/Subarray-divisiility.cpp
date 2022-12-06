@@ -23,26 +23,25 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n; cin >> n;
-  string a, b; cin >> a >> b;
-  int cnt = 0;
-  int i = 0;
-  while (i < n){
-    if (a[i] != b[i]){
-      int j = i;
-      while (a[j] != b[j]){
-        // cout << a[j] << " " << b[j] << endl;
-        j++;
-      }
-      i = j;
-      cnt++;
+  int n;
+  cin >> n;
+  map<int, int> mp;
+  int prefix  = 0;
+  mp[0] = 1;
+  int ans = 0;
+  forn(i, n){
+    int x; cin >> x;
+    prefix += x;
+    ans += mp[(prefix % n)];
+    if (prefix > 0){
+      ans += mp[(prefix % n) - n];
     }
     else{
-      i++;
+      ans += mp[(prefix % n) + n];
     }
-    // cout << i << endl;
+    mp[(prefix % n)]++;
   }
-  cout << cnt;
+  cout << ans << endl;
 }
 
 int32_t main() {
@@ -50,10 +49,6 @@ int32_t main() {
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-  #else
-    freopen("breedflip.in", "r", stdin);
-    freopen("breedflip.out", "w", stdout);
-
   #endif
 
   int tc = 1;
