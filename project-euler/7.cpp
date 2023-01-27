@@ -15,32 +15,36 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 4000000;
+const int MAX = 1e6;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 // int arr[MAX];
-void solve(){
-  // Generate fibonacci sequence 
-  int j = 1, k = 2, sum = 0;
-  while (k <= MAX){
-    sum += (k % 2 == 0) ? k : 0;
-    int s = j + k;
-    j = k, k = s;
-  }
-  cout << sum << endl;
-  // DP optimized solution
-  j = 2, k = 8;
-  sum = j;
-  while (k <= MAX){
-    sum += k;
-    int s = 4 * (k) + j;
-    j = k, k = s;
-  }
 
-  cout << "Recursion formula "<< sum << endl;
+int is_prime(int n){
+  if (n % 2 == 0) return false;
+  for (int i = 3; i * i <= n; i+=2){
+    if (n % i == 0)
+      return false;
+  }
+  return true;
+}
+
+void solve(){
+  int k = 10001;
+
+  int cnt = 1; // First prime is 2
+  int n = 3;
+  while (cnt < k){
+    if (is_prime(n)){
+      cnt++;
+    }
+    if (cnt == k)
+      cout << n << endl;
+    n += 2;
+  }
 }
 
 int32_t main() {

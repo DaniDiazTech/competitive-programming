@@ -3,6 +3,13 @@ using namespace std;
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define ll long long
 
+ll mx = 999;
+int sumdiv(int n){
+  int target = mx/n; 
+  return n * (target * (target + 1)) / 2;
+}
+
+
 int main(){
   fastInp;
   #if LOCAL
@@ -44,6 +51,16 @@ int main(){
 
   std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() << "ns" << std::endl;
   cout << "Sieve : " << sum << endl;    
+  
+  start = chrono::system_clock::now();
+
+  // O(1) solution
+  sum = sumdiv(3) + sumdiv(5) - sumdiv(15);
+
+  end = chrono::system_clock::now();
+
+  std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() << "ns" << std::endl;
+  cout << "O(1) : " << sum << endl;    
 
   return 0;
 }

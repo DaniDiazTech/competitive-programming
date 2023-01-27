@@ -15,7 +15,7 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 4000000;
+const int MAX = 1e6;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
@@ -23,24 +23,18 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  // Generate fibonacci sequence 
-  int j = 1, k = 2, sum = 0;
-  while (k <= MAX){
-    sum += (k % 2 == 0) ? k : 0;
-    int s = j + k;
-    j = k, k = s;
+  int ans = MINF;
+  for (int i = 100; i < 1000; i++){
+    for (int j = 100; j < 1000; j++){
+      int s = i * j;
+      string st = to_string(s);
+      // Test palindrome
+      if (st == string(st.rbegin(), st.rend()) && s > ans){
+        ans = s;
+      }
+    }
   }
-  cout << sum << endl;
-  // DP optimized solution
-  j = 2, k = 8;
-  sum = j;
-  while (k <= MAX){
-    sum += k;
-    int s = 4 * (k) + j;
-    j = k, k = s;
-  }
-
-  cout << "Recursion formula "<< sum << endl;
+  cout << ans << endl;
 }
 
 int32_t main() {
