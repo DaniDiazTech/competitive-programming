@@ -22,14 +22,15 @@ const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
 int g[MAX][MAX];
+int vis[MAX][MAX];
 // L R D U
 int dirx[] = {-1, 1, 0, 0};
 int diry[] = {0, 0, 1, -1};
 
 int n, m;
 
-bool valid(int i, int j){
-  return (i >= 0 && i < n && j >= 0 && j < m);
+bool valid(int i, int j, int ite){
+  return (i >= 0 && i < n && j >= 0 && j < m && vis[i][j] != ite);
 }
 
 
@@ -45,6 +46,7 @@ void solve(){
   int ans = 0;
   for (int i = 0; i < n; i++){
     for (int j = 0; j < m; j++){
+      int ite = ((i) * m) + (j + 1);
       // (i, j) -> Cell to start with
       priority_queue<pair<int, pii>, vector<pair<int, pii>>, greater<pair<int, pii>>> pq;
       // Pair: {weigth of cell, i, j}
@@ -57,14 +59,17 @@ void solve(){
         pair<int, pii> p = pq.top(); 
         int d = p.ff, x = p.ss.ff, y  = p.ss.ss;
         cnt++;
-        if (mx >= d) break;
-        mx = d;
         pq.pop();
+        if (mx >= d){
+          break;
+        }
+        mx = d;
         // cout << "  NODE: " << d << " " << x <<" " << y << endl;
         for (int k = 0; k < 4; k++){
           int xx = x + dirx[k], yy = y + diry[k];
-          if (valid(xx, yy) && mx < g[xx][yy]){
+          if (valid(xx, yy, ite) && mx < g[xx][yy]){
             // cout << "    Children: " << g[xx][yy] << " " << xx <<" " << yy << endl;
+            vis[xx][yy] = ite;
             pq.push({g[xx][yy], {xx, yy}});
           }
         }
