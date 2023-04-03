@@ -23,9 +23,21 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n, k, e;
-  cin >> n >> k >> e;
-  
+  int n;
+  cin >> n;
+  int a[n];
+  forn(i,n) cin >> a[i];
+  for (int x = 0; x <= 256; x++){
+    int res = a[0] ^ x;
+    for (int i = 1; i < n; i++){
+      res ^= (a[i] ^ x);
+    }
+    if (res == 0){
+      cout << x << endl;
+      return;
+    }
+  }
+  cout << - 1 << endl;
 }
 
 int32_t main() {
@@ -36,7 +48,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

@@ -23,9 +23,30 @@ const int MOD = 1e9 + 7;
 
 // int arr[MAX];
 void solve(){
-  int n, k, e;
-  cin >> n >> k >> e;
-  
+  int n, m; cin >> n >> m;
+  int k[n];
+  forn(i,n){
+    cin >> k[i];
+  }
+  sort(k, k + n);
+  vector<vector<int>> v;
+  forn(i,m){
+    int a, b, c; cin >> a >> b >> c;
+    int ind = lower_bound(k, k +n, b) - k;
+    // First element greater than b
+    // Check such number exist
+    if (ind < n && (b - k[ind]) * (b - k[ind]) < 4 * a * c){
+      cout << "YES\n" << k[ind] << endl;
+      continue;
+    }
+    ind--;
+    if (ind >= 0 && (b - k[ind]) * (b - k[ind]) < 4 * a * c){
+      cout << "YES\n" << k[ind] << endl;
+      continue;
+    }
+    cout << "NO\n";
+  }
+  cout << endl;
 }
 
 int32_t main() {
@@ -36,7 +57,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
