@@ -44,7 +44,7 @@ int merge(int l, int q, int r){
   while (x < n1 && y < n2){
     // Inversion count
     if (la[x] > ra[y]){
-      cnt += (q + y + 1) - (l + x);
+      cnt += (q + 1) - (l + x);
       a[k] = ra[y];
       y++;
     }
