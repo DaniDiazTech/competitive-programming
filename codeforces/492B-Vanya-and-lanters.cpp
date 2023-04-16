@@ -15,39 +15,58 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e5 + 10;
+const int MAX = 1e6;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-int dp[MAX];
-int cnt[MAX];
-vector<int> a;
+// int arr[MAX];
+void solve(){
+  int n, l;
+  cin >> n >> l;
+  vector<int> a;
+  forn(i,n){
+    int x; cin >> x;
+    a.pb(x);
+  }
+  sort(a.begin(), a.end());
+  // Get max gap;
+  int g1, g2, gap = -1;
+  // Check extremes
+  double e1 = MINF, e2 = MINF;
+  if (a[0] != 0){
+    e1 = a[0]; 
+  }
+  if (a[n - 1] != l){
+    e2 = l - a[n - 1];
+  }
+
+  forn(i,n - 1){
+    if ((a[i + 1] - a[i]) > gap){
+      gap = (a[i + 1] - a[i]);
+      g1 = a[i]; g2 = a[i + 1];
+    }
+  }
+  
+  double ans = (double)(g2 - g1) / 2;
+  ans = max(max(ans, e1), e2);
+  cout << setprecision(9) << ans << endl; 
+}
+
 int32_t main() {
   fastInp;
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
   #endif
-  int n;
-  cin >> n;
-  forn(i,n){
-    int x;
-    cin >> x;
-    cnt[x]++;
-  }
-  dp[0]= 0;
-  for (int i = 1; i < MAX; i++){
-    dp[i] = i * cnt[i];
-    if (i -2 >= 0){
-      dp[i] += dp[i - 2];
-    }
-    if (dp[i - 1] > dp[i]){
-      dp[i] = dp[i - 1];
-    }
-  }
-  cout << dp[MAX - 1] << endl;
 
+  int tc = 1;
+  // cin >> tc;
+
+  for (int t = 1; t <= tc; t++){
+    // cout << "Case #" << t << ": ";
+    solve();
+  }
   return 0;
 }

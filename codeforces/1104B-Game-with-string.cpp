@@ -15,39 +15,31 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e5 + 10;
+const int MAX = 1e6;
 const int MIN = -MAX;
 const int INF = LLONG_MAX;
 const int MINF = LLONG_MIN;
 const int MOD = 1e9 + 7;
 
-int dp[MAX];
-int cnt[MAX];
-vector<int> a;
+// int arr[MAX];
+void solve(){
+  int n;
+  cin >> n;
+}
+
 int32_t main() {
   fastInp;
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
   #endif
-  int n;
-  cin >> n;
-  forn(i,n){
-    int x;
-    cin >> x;
-    cnt[x]++;
-  }
-  dp[0]= 0;
-  for (int i = 1; i < MAX; i++){
-    dp[i] = i * cnt[i];
-    if (i -2 >= 0){
-      dp[i] += dp[i - 2];
-    }
-    if (dp[i - 1] > dp[i]){
-      dp[i] = dp[i - 1];
-    }
-  }
-  cout << dp[MAX - 1] << endl;
 
+  int tc = 1;
+  // cin >> tc;
+
+  for (int t = 1; t <= tc; t++){
+    // cout << "Case #" << t << ": ";
+    solve();
+  }
   return 0;
 }
