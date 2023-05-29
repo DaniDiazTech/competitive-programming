@@ -22,56 +22,38 @@ const int MIN = -MAX;
 const int oo = LLONG_MAX;
 const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
-// Not working
 
-void countsort(int a[], int n, int place, int base=10){
-  int fq[base] = {0};
-  int out[n];
-
-  forn(i,n){
-    fq[(a[i] / place) % base]++;
-  }
-  fore(i,1,base) fq[i] += fq[i - 1];
-
-  for (int i = n -1; i>=0; i--){
-    int d = (a[i]/ place) % base;
-    out[fq[d] - 1] = a[i];
-    fq[d]--;
-  }
-
-  forn(i,n){
-    a[i] = out[i];
-  }
-}
-
-void radixsort(int a[], int n, int base=10){
-  int mx = a[max_element(a, a + n) - a]; 
-  for (int place = 1; mx / place > 0; place *= base){
-    countsort(a, n, place, base);
-  }
-}
-
-// int arr[MAX];
+int dp[MAX];
+int w[200], v[200];
 void solve(){
-  int n;
-  cin >> n;
-
-  int a, b, c, x ,y; cin >> a >> b >> c >> x >> y;
-  int s[n];
-  s[0] = a;
-
-  fore(i,1, n){
-    s[i] = (s[i - 1] * b + a) % c;
-  }
-  radixsort(s, n, 31623);
-  int ans = 0;
+  int n, W;
+  cin >> n >> W;
+  int sum_value = 0;
   forn(i,n){
-    ans = (ans * x  +  s[i]) % y;
+    cin >> w[i] >> v[i];
+    sum_value += v[i];
   }
+  fill(dp, dp + sum_value + 5, 1e17);
+  dp[0] = 0;
+  forn(i,n){
+    for (int va = sum_value - v[i]; va >= 0; va--){
+      dp[va + v[i]] = min(dp[va + v[i]], dp[va] + w[i]);
+    }
+    
+    forn(i,sum_value + 1){
+      cout << dp[i] << " ";
+    }
+    cout << endl;
+  }
+  int ans = 0;
+  forn(i,sum_value + 1){
+    if (dp[i] <= W){
+      ans = max(ans, i);
+    }
+    cout << (dp[i] == 1e17 ? -1 : dp[i]) << " ";
+  }
+  cout << endl;
   cout << ans << endl;
-
-
-
 }
 
 int32_t main() {
@@ -82,7 +64,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  cin >> tc;
+  // cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

@@ -22,56 +22,38 @@ const int MIN = -MAX;
 const int oo = LLONG_MAX;
 const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
-// Not working
-
-void countsort(int a[], int n, int place, int base=10){
-  int fq[base] = {0};
-  int out[n];
-
-  forn(i,n){
-    fq[(a[i] / place) % base]++;
-  }
-  fore(i,1,base) fq[i] += fq[i - 1];
-
-  for (int i = n -1; i>=0; i--){
-    int d = (a[i]/ place) % base;
-    out[fq[d] - 1] = a[i];
-    fq[d]--;
-  }
-
-  forn(i,n){
-    a[i] = out[i];
-  }
+string s;
+int vis[MAX];
+bool valid(int u){
+  return !(u < 0 || u >= s.size());
 }
 
-void radixsort(int a[], int n, int base=10){
-  int mx = a[max_element(a, a + n) - a]; 
-  for (int place = 1; mx / place > 0; place *= base){
-    countsort(a, n, place, base);
+void propagate(int u, int st){
+  s[u] = '1';
+  vis[u] = 1;
+  if (valid(u + st) && (s[u + st] == '?' || s[u + st]  == '1') && !vis[u + st]){
+    propagate(u + st, st);
   }
+  
 }
 
-// int arr[MAX];
+
 void solve(){
-  int n;
-  cin >> n;
-
-  int a, b, c, x ,y; cin >> a >> b >> c >> x >> y;
-  int s[n];
-  s[0] = a;
-
-  fore(i,1, n){
-    s[i] = (s[i - 1] * b + a) % c;
+  cin >> s;
+  int n = s.size();
+  for (int i =0 ; i < n; i++){
+    vis[i] = 0;
   }
-  radixsort(s, n, 31623);
-  int ans = 0;
-  forn(i,n){
-    ans = (ans * x  +  s[i]) % y;
+  for (int i =0 ; i < n; i++){
+    if (s[i] == '1'){
+      propagate(i, 1);
+      propagate(i, -1);
+    }
   }
-  cout << ans << endl;
-
-
-
+  for (int i =0 ; i < n; i++){
+    if (s[i] == '?') s[i] ='0';
+  }
+  cout << s << endl;
 }
 
 int32_t main() {

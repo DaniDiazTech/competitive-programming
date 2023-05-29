@@ -5,34 +5,42 @@ using namespace std;
 #define endl '\n'
 #define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 #define forn(i, n) for (int i = 0; i < n; i++) // for in range in python
-#define FOR(i, a, b) for (int i = a; i < b; i++) // for in range in python
+#define fore(i, a, b) for (int i = a; i < b; i++) // for in range in python
 #define int long long int
 #define double long double
 #define pb push_back
 #define ff first
 #define ss second
 #define mk make_pair
+#define all(x) x.begin(),x.end()
+#define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
 
-const int MAX = 1e6;
+const int MAX = 200;
 const int MIN = -MAX;
-const int INF = LLONG_MAX;
-const int MINF = LLONG_MIN;
-const int MOD = 1e9 + 7;
-
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
+const int mod = 1e9 + 7;
+const int mxw  = 1e5;
+int dp[100010];
+// 2D DP
+// Used Weight number of objects
 void solve(){
-  int n;
-  cin >> n;
-  int h[n + 1];
-  int dp[MAX];
-  FOR(i,1,n+1)cin >> h[i];
-  dp[0] = MAX;
-  dp[1] = 0;
-  for (int i  = 2; i  <= n;i++){
-    dp[i] = min(dp[i-1] + abs(h[i] - h[i - 1]), dp[i -2]  + abs(h[i] - h[i - 2])); 
+  int n, W;
+  cin >> n >> W;
+  forn(i,n){
+    int w, v;
+    cin >> w >> v;
+    for (int wa = W  - w; wa >= 0 ; wa--){
+      dp[wa + w] = max(dp[wa + w], dp[wa] + v);
+    }
   }
-  cout << dp[n];
+  int ans = 0 ;
+  for (int i = 0; i <= W; i++){
+    ans = max(ans, dp[i]);
+  }
+  cout << ans << endl;
 }
 
 int32_t main() {
