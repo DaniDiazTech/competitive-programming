@@ -18,50 +18,59 @@ using namespace std;
 typedef pair<int, int> pii;
 typedef vector<int> vii;
 
-const int MAX = 1e6;
+const int MAX = 4000;
 const int MIN = -MAX;
 const int oo = LLONG_MAX / 2;
 const int ooo = LLONG_MIN / 2;
 const int mod = 1e9 + 7;
 
-vector<pii> g[MAX];
-int dis[MAX];
+vector<vii> edges;
+int vis[MAX], dis[MAX], par[MAX];
+
+
 void solve(){
-  int n, m, k; cin >> n >> m >> k;
-  vii ans;
-  forn(i,m){
-    int a, b, c; cin >>a >> b >> c; 
-    g[a].pb({c, b});
+  int n, m;
+  cin >> n >> m;
+  for (int i =0;i < m; i++){
+    vii v(3);
+    cin >> v[0] >> v[1] >> v[2];
+    edges.pb(v);
   }
-
-  for (int i =0 ; i<=n; i++) dis[i] = oo;
-
-  // Dijkstra
-  priority_queue<pii> pq;
-  pq.push({0, 1});
-  dis[1] = 0;
-
-  while (!pq.empty()){
-    pii p = pq.top(); pq.pop();
-    int w = p.ff, u = p.ss;
-    for (auto x: g[u]){
-      // cout << x.ss << " " << x.ff << endl;
-      if (dis[x.ss] > dis[u] + x.ff){
-        // Better answer found, relax
-        pq.push({-x.ff, x.ss});
-        dis[x.ss] = dis[u] + x.ff;
-      }
-      if (x.ss == n){
-        // cout << "HERE" << endl;
-        ans.pb(dis[x.ss]);
+  int x = -1;
+  for (int i =1; i <= n; i++){
+    x = -1;
+    for (auto e: edges){
+      if (dis[e[1]] > dis[e[0]] + e[2]){
+        dis[e[1]] = dis[e[0]] + e[2];
+        par[e[1]] = e[0];
+        x = e[0];
       }
     }
   }
-  sort(ans.begin(), ans.end());
-  for (int i = 0; i < k; i++){
-    cout << ans[i] << " ";
+  // X has the result of the nth iteration
+  if (x == -1){
+    cout << "NO" << endl;
+    return;
   }
+  cout << "YES" << endl;
+
+  // Now traceback n times to get a node that it's guaranteed to b in the cycle
+  for (int i = 0; i < n; i++){
+    x = par[x];
+  }
+
+  // Start the path reconstruction
+  vii path;
+  for (int v = x; ; v = par[v]){
+    path.pb(v);
+    if (v == x && path.size() > 1)
+      break;
+  }
+
+  reverse(path.begin(), path.end());
+  for (auto x: path) cout << x << " ";
 }
+
 
 int32_t main() {
   fastInp;
@@ -71,6 +80,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
+  // cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
