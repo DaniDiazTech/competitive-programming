@@ -32,7 +32,7 @@ struct segtree{
     size = 1;
     while (size < n) size *= 2;
     // Store the minimum, so it should start with a big value
-    tree.assign(2 * size, oo);
+    tree.assign(2 * size, 0);
   }
 
   void build(vii &a, int x, int lx, int rx){
