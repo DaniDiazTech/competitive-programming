@@ -25,7 +25,7 @@ struct segtree{
 
   void build(vector<int> &a, int x, int lx, int rx){
     if (rx - lx == 1){
-      if (lx < a.size()){
+      if (lx < (int)a.size()){
         t[x] = a[lx];
       }
       return;
@@ -60,7 +60,7 @@ struct segtree{
   }
   int query(int l, int r, int x, int lx, int rx){
     if (lx >= r || rx <= l) return NEUTRAL;
-    if (lx >= l || rx <= r) return t[x];
+    if (lx >= l && rx <= r) return t[x];
     int m = (lx + rx) / 2;
     return merge(query(l,r,lc(x), lx, m), query(l,r,rc(x),m,rx));
   }
