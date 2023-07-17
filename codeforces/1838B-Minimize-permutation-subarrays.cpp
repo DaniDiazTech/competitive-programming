@@ -18,31 +18,43 @@ using namespace std;
 typedef pair<int, int> pii;
 typedef vector<int> vii;
 
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
-
 const int MAX = 1e6;
 const int MIN = -MAX;
 const int oo = LLONG_MAX / 2;
 const int ooo = LLONG_MIN / 2;
 const int mod = 1e9 + 7;
 
-
-// int dp[MAX];
+// int arr[MAX];
 void solve(){
   int n;
   cin >> n;
+  int one = -1, two = -1, mx = -1; 
+  for (int i = 1; i <= n; i++){
+    int x; cin >> x;
+    if (x == 1) one = i;
+    if (x == 2) two = i;
+    if (x == n) mx = i;
+  }
+  if ((one < mx && mx < two) || (two < mx && mx < one)){
+    cout << "1 1";
+  }
+  else if (one < two){
+    if (mx < one){
+      cout << one << " " << mx;
+    }
+    else{
+      cout << two << " " << mx;
+    }
+  }
+  else{
+    if (mx < one){
+      cout << two << " " << mx;
+    }
+    else{
+      cout << one << " " << mx;
+    }
+  }
+  cout << endl;
 }
 
 int32_t main() {
@@ -53,7 +65,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";

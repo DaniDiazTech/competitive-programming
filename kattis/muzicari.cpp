@@ -18,31 +18,38 @@ using namespace std;
 typedef pair<int, int> pii;
 typedef vector<int> vii;
 
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
-
 const int MAX = 1e6;
 const int MIN = -MAX;
 const int oo = LLONG_MAX / 2;
 const int ooo = LLONG_MIN / 2;
 const int mod = 1e9 + 7;
 
-
-// int dp[MAX];
+// int arr[MAX];
 void solve(){
-  int n;
-  cin >> n;
+  int t, n ;
+  cin >> t >> n;
+  vector<pii> v;
+  forn(i,n){
+    int x; cin >> x;
+    v.pb({x, i});
+  }
+  sort(v.rbegin(), v.rend());
+  int ans[n];
+  int l = 0, r= 0;
+  for (auto x: v){
+    if (l > r){
+      // r
+      ans[x.ss] = r;
+      r += x.ff;
+    }
+    else{
+      ans[x.ss] = l;
+      l += x.ff;
+    }
+  }
+  for (int i= 0; i < n; i++){
+    cout << ans[i] << " ";
+  }
 }
 
 int32_t main() {
