@@ -12,38 +12,44 @@ using namespace std;
 #define ff first
 #define ss second
 #define mk make_pair
-#define vii vector<int> 
 #define all(x) x.begin(),x.end()
 #define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
-typedef vector<int> vii;
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int oo = LLONG_MAX / 2;
-const int ooo = LLONG_MIN / 2;
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
 
+vector<int> g[MAX];
+int vis[MAX];
 
-// int dp[MAX];
 void solve(){
-  int n;
-  cin >> n;
+  int n, m;
+  cin >> n >> m;
+
+  for (int i = 0; i < m; i++){
+    int a,b; cin >> a >> b;
+    g[a].pb(b);
+  }
+
+  // BFS with dp
+  queue<int> q;
+  q.push(1);
+  vis[1] = 1;
+  while (!q.empty()){
+    int v = q.front();
+    q.pop();
+    for (auto x: g[v]){
+      // if (vis[v] == 0)
+      q.push(v);
+      vis[x] = (vis[x] + vis[v]) % mod;
+      cout << "VIS: " << x << " CURRENT:  " << vis[x] << endl;
+    }
+  }
+  cout << vis[n] << endl;
 }
 
 int32_t main() {

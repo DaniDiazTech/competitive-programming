@@ -12,38 +12,40 @@ using namespace std;
 #define ff first
 #define ss second
 #define mk make_pair
-#define vii vector<int> 
 #define all(x) x.begin(),x.end()
 #define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
-typedef vector<int> vii;
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int oo = LLONG_MAX / 2;
-const int ooo = LLONG_MIN / 2;
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
 
+const int N = 10e6 + 1;
 
-// int dp[MAX];
+int fact[N];
+int div[N];
+
+int binpow(int b, int p){
+  return (((binpow(b, p / 2) * binpow(b, p / 2)) % mod) * (b % 2 == 1 ? b : 1) % mod;  
+}
+
 void solve(){
   int n;
   cin >> n;
+  fact[0] = fact[1] = 1;
+  
+  fore(i,2,N){
+    fact[i] = (i * fact[i - 1]) % mod;
+    div[i] = binpow(i, mod - 2);
+  )}
+
+  forn(i,n){
+    int a, b; cin >> a >> b;
+    cout << (fact[a] * div[(fact[a] * fact[a - b]) % mod]) % mod << endl;
+  }
 }
 
 int32_t main() {

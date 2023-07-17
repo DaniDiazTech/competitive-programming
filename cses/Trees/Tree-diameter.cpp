@@ -12,40 +12,58 @@ using namespace std;
 #define ff first
 #define ss second
 #define mk make_pair
-#define vii vector<int> 
 #define all(x) x.begin(),x.end()
 #define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
-typedef vector<int> vii;
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int oo = LLONG_MAX / 2;
-const int ooo = LLONG_MIN / 2;
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
+vector<int> g[MAX];
+int dis[MAX];
 
-
-// int dp[MAX];
 void solve(){
   int n;
   cin >> n;
+  forn(i, n - 1){
+    int a, b; cin >> a >> b;
+    g[a].pb(b);
+    g[b].pb(a);
+  }
+  queue<pair<int, int>> q;
+  q.push({1, 0});
+  int last = 1;
+  while (!q.empty()){
+    pii p = q.front();
+    q.pop();
+    for (auto x: g[p.ff]){
+      if (x != p.ss)
+        q.push({x, p.ff});
+    }
+    if (q.empty()){
+      last = p.ff;
+    }
+  }
+  queue<vector<int>> qq;
+  int mx = 0;
+  qq.push({last,0,0});
+  while (!qq.empty()){
+    vector<int> v = qq.front(); 
+    qq.pop();
+    int u = v[0], p = v[1], l = v[2];
+    mx = max(mx, l);
+    for (auto x: g[u]){
+      if (x != p){
+        vector<int> vv = {x, u, l + 1};
+        qq.push(vv);
+      }
+    }
+  }
+  cout << mx << endl;
 }
-
 int32_t main() {
   fastInp;
   #if LOCAL

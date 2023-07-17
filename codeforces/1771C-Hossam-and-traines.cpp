@@ -17,7 +17,6 @@ using namespace std;
 #define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
-typedef vector<int> vii;
 
 template<typename T>
 ostream& operator<<(ostream& os, const vector<T> &v){
@@ -35,15 +34,19 @@ ostream& operator<<(ostream& os, const pair<T1, T2> &p){
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int oo = LLONG_MAX / 2;
-const int ooo = LLONG_MIN / 2;
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
 
 
-// int dp[MAX];
+vii primes;
+int p[MAX];
 void solve(){
   int n;
   cin >> n;
+  int a[n];
+  forn(i,n) cin >> a[i];
+
 }
 
 int32_t main() {
@@ -54,8 +57,17 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
+  int N = 1e5 +10;
+  for (int i =2 ; i < N ; i++){
+    if (!p[i]){
+      primes.pb(i);
+      for (int j = i; j < N; j += i){
+        p[j] = i;
+      }
+    }  
+  }
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
     solve();

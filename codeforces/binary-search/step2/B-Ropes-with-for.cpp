@@ -12,38 +12,44 @@ using namespace std;
 #define ff first
 #define ss second
 #define mk make_pair
-#define vii vector<int> 
 #define all(x) x.begin(),x.end()
 #define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
-typedef vector<int> vii;
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int oo = LLONG_MAX / 2;
-const int ooo = LLONG_MIN / 2;
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
 
-
-// int dp[MAX];
+vector<int> v;
+int n, k;
+bool f(double x){
+  int cnt = 0;
+  for (auto num: v){
+    cnt += floor(num / x);
+  }
+  return k <= cnt;
+}
 void solve(){
-  int n;
-  cin >> n;
+  cin >> n >> k;
+  forn(i,n){
+    int x; cin >> x;
+    v.pb(x);
+  }
+  // With 100 ops is enough for precision
+  // L is never evaluated in the function as 0;
+  double l = 0,  r = 1e8; 
+  for (int i = 0 ; i < 100; i++){
+    double m = (l + r) / 2;
+    if (f(m)){
+      l = m;
+    }
+    else r = m;
+  }
+  cout << setprecision(7) <<  l << endl;
+  
 }
 
 int32_t main() {

@@ -12,38 +12,42 @@ using namespace std;
 #define ff first
 #define ss second
 #define mk make_pair
-#define vii vector<int> 
 #define all(x) x.begin(),x.end()
 #define sz(x) (int)x.size() 
 
 typedef pair<int, int> pii;
-typedef vector<int> vii;
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T> &v){
-    for(auto const &i: v){
-        os<<i<<" ";
-    }
-    os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
-    return os;
-}
 
 const int MAX = 1e6;
 const int MIN = -MAX;
-const int oo = LLONG_MAX / 2;
-const int ooo = LLONG_MIN / 2;
+const int oo = LLONG_MAX;
+const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
 
-
-// int dp[MAX];
+bool f(int t, int x, int y, int n){
+  if (t < min(x, y)){
+    return 0;
+  }
+  int ans = 1;
+  t -= min(x, y);
+  if (t < 0){
+    return ans >= n;
+  }
+  ans += (t / x) + (t / y);
+  return ans >= n;
+}
 void solve(){
-  int n;
-  cin >> n;
+  int n, x, y;
+  cin >> n >> x >> y;
+
+  int l = 0, r = 1e12 + 1000;
+  while (l+ 1 < r){
+    int m = (l + r) / 2;
+    if (f(m, x, y, n)){
+      r = m;
+    }
+    else l = m;
+  }
+  cout << r << endl;
 }
 
 int32_t main() {

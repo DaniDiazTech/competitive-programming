@@ -25,6 +25,9 @@ const int MOD = 1e9 + 7;
 void solve(){
   int n;
   cin >> n;
+  for (int i =0 ; i < n ; i++){
+    
+  } 
 }
 
 int32_t main() {
@@ -35,7 +38,7 @@ int32_t main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     // cout << "Case #" << t << ": ";
