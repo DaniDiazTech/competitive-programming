@@ -18,17 +18,17 @@ using namespace std;
 typedef pair<int, int> pii;
 typedef vector<int> vii;
 
+template<typename T1, typename T2>
+ostream& operator<<(ostream& os, const pair<T1, T2> &p){
+    os << p.first <<  " " << p.second;
+    return os;
+}
 template<typename T>
 ostream& operator<<(ostream& os, const vector<T> &v){
     for(auto const &i: v){
         os<<i<<" ";
     }
     os<<'\n';
-    return os;
-}
-template<typename T1, typename T2>
-ostream& operator<<(ostream& os, const pair<T1, T2> &p){
-    os << p.first <<  " " << p.second;
     return os;
 }
 
