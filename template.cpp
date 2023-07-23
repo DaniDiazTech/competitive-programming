@@ -37,6 +37,7 @@ const int MIN = -MAX;
 const int oo = LLONG_MAX / 2;
 const int ooo = LLONG_MIN / 2;
 const int mod = 1e9 + 7;
+const string yes = "YES", no = "NO";
 
 
 // int dp[MAX];
