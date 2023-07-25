@@ -148,3 +148,4 @@ cython_debug/
 # Cpp stuff
 *.out
 *.txt
+*.in
