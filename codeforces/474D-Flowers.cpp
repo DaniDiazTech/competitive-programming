@@ -4,39 +4,18 @@ using namespace std;
 
 #define ll long long
 
-const int mod = 1e9 + 7;
+const ll mod = 1e9 + 7;
 const string yes = "YES", no = "NO";
-const int N = 1e6;
 
-const int oo = 1e9;
-int a[N];
-int dp[N];
+const int N = 1e5 + 10;
 
-int n;
+ll dp[N];
 
-int go(int i){
-
-  if (i > n){
-    return oo;
-  }
-
-  if (dp[i] != oo) return dp[i];
-
-
-  return dp[i] = min((go(i + 1) + 1), go(i + a[i] + 1));
-
-}
 
 void solve(){
-  cin >> n;
-  for (int i =0 ;i < n; i++){
-    cin >> a[i];
-    dp[i] = oo;
-  }
-  dp[n] = 0;
-
-  cout << go(0) << '\n';
-  
+  int a, b;
+  cin >> a >> b;
+  cout << (dp[b] - dp[a - 1] + (mod)) % mod << '\n';
 }
 
 int main() {
@@ -47,8 +26,21 @@ int main() {
     freopen("output.txt", "w", stdout);
   #endif
 
-  int tc = 1;
-  cin >> tc;
+  int tc = 1, k ;
+
+  cin >> tc >> k ;
+
+  for (int i= 0; i < N; i++){
+    if (i < k){
+      dp[i] = 1;
+      continue;
+    }
+    dp[i] = (dp[i - 1]+ dp[i - k]) % mod;
+  }
+  
+  for (int i= 1; i < N; i++){
+    dp[i]= (dp[i - 1] + dp[i]) % mod;
+  }
 
   for (int t = 1; t <= tc; t++){
     solve();

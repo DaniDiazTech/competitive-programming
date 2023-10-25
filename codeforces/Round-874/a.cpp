@@ -6,37 +6,19 @@ using namespace std;
 
 const int mod = 1e9 + 7;
 const string yes = "YES", no = "NO";
-const int N = 1e6;
-
-const int oo = 1e9;
-int a[N];
-int dp[N];
-
-int n;
-
-int go(int i){
-
-  if (i > n){
-    return oo;
-  }
-
-  if (dp[i] != oo) return dp[i];
-
-
-  return dp[i] = min((go(i + 1) + 1), go(i + a[i] + 1));
-
-}
 
 void solve(){
+  int n;
   cin >> n;
-  for (int i =0 ;i < n; i++){
-    cin >> a[i];
-    dp[i] = oo;
+  string s; cin >> s;
+  set<string> st;
+  for (int i =0 ;i < n - 1; i++){
+    string x;
+    x += s[i];
+    x += s[i +1 ];
+    st.insert(x);
   }
-  dp[n] = 0;
-
-  cout << go(0) << '\n';
-  
+  cout << st.size() << '\n';
 }
 
 int main() {
