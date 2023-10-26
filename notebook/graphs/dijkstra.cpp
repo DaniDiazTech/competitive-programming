@@ -25,6 +25,7 @@ n: number of nodes
 void dijsktra(int s, int n, vector<ll> &d, vector<int> &p){
   d.assign(n + 1, inf);
   p.assign(n + 1, -1);
+  d[s] = 0;
 
   // {distance, vertex}
   priority_queue< pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>> > pq;
