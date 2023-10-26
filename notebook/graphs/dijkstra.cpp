@@ -1,16 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define ll long long
 /*
 Dijkstra implementation in O(nlogn + mlogn)
 Using priority_queue
+Distance can exceed 32 bit int
 */
 
-const int inf = 1e9;
+const ll inf = 1e12;
 const int N = 2 * 1e5;
 
 // {distance, vertex}
-vector<pair<int,int>> g[N];
+vector<pair<ll,int>> g[N];
 
 /*
 Dijkstra stores two vectors of size n + 1 (works with 1-indexed vertex)
@@ -20,12 +22,12 @@ s: starting node
 n: number of nodes
 */
 
-void dijsktra(int s, int n, vector<int> &d, vector<int> &p){
+void dijsktra(int s, int n, vector<ll> &d, vector<int> &p){
   d.assign(n + 1, inf);
   p.assign(n + 1, -1);
 
   // {distance, vertex}
-  priority_queue< pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>> > pq;
+  priority_queue< pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>> > pq;
 
   pq.push({0, s});
 
@@ -33,14 +35,14 @@ void dijsktra(int s, int n, vector<int> &d, vector<int> &p){
     auto pr = pq.top();
     pq.pop();
 
-    int dis = pr.first, u = pr.second;
+    ll dis = pr.first, u = pr.second;
 
     // already marked u
     if (dis != d[u]) continue;
 
     for (auto edge: g[u]){
       int v = edge.second; 
-      int x = edge.first + d[u];
+      ll x = edge.first + d[u];
 
       if (x < d[v]){
         // found better path
