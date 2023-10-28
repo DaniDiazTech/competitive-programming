@@ -10,7 +10,6 @@ const string yes = "YES", no = "NO";
 const int N = 3000;
 const ll inf = 1e15;
 
-vector<pair<ll,int>> g[N];
 vector<int> g2[N];
 bool vis[N];
 
@@ -27,6 +26,53 @@ void dfs(int u){
 
 
 
+// {distance, node}
+vector<pair<ll,int>> g[N];
+
+/*
+SFPA Shortest path faster algorithm (SPFA)
+Calculates single source shortest (simple) path with negative cycles.
+Complexity:
+Worst: O(nm)
+Average: O(m)
+*/
+
+bool spfa(int s, int n, vector<ll>& d) {
+    d.assign(n + 1, -inf);
+    vector<int> cnt(n + 1, 0);
+    vector<bool> inqueue(n + 1, false);
+    queue<int> q;
+
+    d[s] = 0;
+    q.push(s);
+    inqueue[s] = true;
+
+    while (!q.empty()) {
+
+        int u = q.front();
+        q.pop();
+        inqueue[u] = false;
+
+        for (auto v : g[u]) {
+            int w = v.first;
+            int to = v.second;
+            if (!possible.count(to)) continue;
+
+            if (d[u] + w > d[to]) {
+                d[to] = d[u] + w;
+
+                if (!inqueue[to]) {
+                    q.push(to);
+                    inqueue[to] = true;
+                    cnt[to]++;
+                    if (cnt[to] > n)
+                        return false;  // negative cycle
+                }
+            }
+        }
+    }
+    return true;
+}
 
 
 void solve(){
@@ -44,42 +90,8 @@ void solve(){
 
   // check elements that reach n
   dfs(n);
-
-  // spfa
-  queue<int> q;
-  vector<ll> d(n + 1, -inf), cnt(n + 1, 0);
-  vector<bool> inqueue(n + 1);
-
-  d[1] = 0;
-  inqueue[1] = 1;
-  q.push(1);
-
-  bool ok = 1;
-  while (!q.empty()){
-    int u = q.front();
-    q.pop();
-    inqueue[u] = false;
-    for (auto v: g[u]){
-      if (!possible.count(v.second)) continue;
-      ll x = d[u] + v.first;
-      // maximize distance
-      if (x > d[v.second]){
-        d[v.second] = x;
-
-        if (!inqueue[v.second]){
-          q.push(v.second);
-          cnt[v.second]++;
-          inqueue[v.second] = true;
-          if (cnt[v.second] > n + 1){
-            // found positive cycle
-            ok = 0;
-            while (!q.empty()) q.pop();
-            break;
-          }
-        }
-      }
-    }
-  }
+  vector<ll> d;
+  bool ok = spfa(1, n, d);
 
   if (ok){
     cout << d[n] << '\n';
