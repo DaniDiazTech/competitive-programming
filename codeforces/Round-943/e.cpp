@@ -7,25 +7,23 @@ using namespace std;
 const int mod = 1e9 + 7;
 const string yes = "YES", no = "NO";
 
-
 void solve(){
-  // 0 circle, 1 square, 2 triangle
-  vector<double> mn = {2, 1, sqrt(3.0) / 2.0}, mx = {2, sqrt(2), 1};
-  int t, L;
-  cin >> t >> L;
-  t--;
+  int n;
+  cin >> n;
 
-  int q;
-  cin >> q;
-  int cnt = 0;
-  while (q--){
-    int type, x;
-    cin >> type >> x;
-    type--;
-
-    if (mx[t] * (1.0 * L) >= mn[type] * x) cnt++;
+  cout << "1 1\n1 2\n";
+  if (n == 2){
   }
-  cout << cnt << '\n';
+  else if (n == 3){
+    cout << "3 3\n";
+  }
+  else{
+    cout << "4 2\n";
+    for (int j = 4; j <= n; j++){
+      cout << j << " " << j << '\n';
+    }
+  }
+  cout << '\n';
 }
 
 int main() {
@@ -37,7 +35,7 @@ int main() {
   #endif
 
   int tc = 1;
-  // cin >> tc;
+  cin >> tc;
 
   for (int t = 1; t <= tc; t++){
     solve();

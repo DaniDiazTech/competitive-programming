@@ -8,24 +8,28 @@ const int mod = 1e9 + 7;
 const string yes = "YES", no = "NO";
 
 
-void solve(){
-  // 0 circle, 1 square, 2 triangle
-  vector<double> mn = {2, 1, sqrt(3.0) / 2.0}, mx = {2, sqrt(2), 1};
-  int t, L;
-  cin >> t >> L;
-  t--;
-
-  int q;
-  cin >> q;
-  int cnt = 0;
-  while (q--){
-    int type, x;
-    cin >> type >> x;
-    type--;
-
-    if (mx[t] * (1.0 * L) >= mn[type] * x) cnt++;
+ll gcd(ll a, ll b, ll &x, ll &y){
+  if (b == 0){
+    x = 1;
+    y = 0;
+    return a;
   }
-  cout << cnt << '\n';
+  ll x1, y1;
+  ll d = gcd(b, a % b, x1, y1);
+  x = y1;
+  y = x1 - y1 * (a / b);
+  return d;
+}
+
+void solve(){
+  ll a, b;
+  while (cin >> a){
+    cin >> b;
+    ll x, y;
+    ll d = gcd(a, b, x, y);
+
+    cout << x << " " << y << " " << d << endl;
+  }
 }
 
 int main() {

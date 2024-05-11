@@ -26,6 +26,16 @@ void solve(){
   cout << ans << '\n';
 }
 
+void solve2(){
+  double v, a, k;
+  cin >> v >> a >> k;
+  a = a * pi / 180.0;
+  double cosa = cos(a), sina = sin(a);
+  double ans = (v * v * cosa * sina / 5.0) * (k / (k - 1));
+  cout << setprecision(2) << fixed;
+  cout << ans << '\n';
+}
+
 int main() {
   cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
 
@@ -34,10 +44,5 @@ int main() {
     freopen("output.txt", "w", stdout);
   #endif
 
-  int tc = 1;
-  // cin >> tc;
-
-  for (int t = 1; t <= tc; t++){
-    solve();
-  }
+  solve2();
 }
