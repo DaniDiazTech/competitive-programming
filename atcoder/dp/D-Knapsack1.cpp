@@ -2,60 +2,67 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define endl '\n'
-#define fastInp cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
-#define forn(i, n) for (int i = 0; i < n; i++) // for in range in python
-#define fore(i, a, b) for (int i = a; i < b; i++) // for in range in python
-#define int long long int
-#define double long double
-#define pb push_back
-#define ff first
-#define ss second
-#define mk make_pair
-#define all(x) x.begin(),x.end()
-#define sz(x) (int)x.size() 
+#define ll long long
 
-typedef pair<int, int> pii;
-
-const int MAX = 200;
-const int MIN = -MAX;
-const int oo = LLONG_MAX;
-const int ooo = LLONG_MIN;
 const int mod = 1e9 + 7;
-const int mxw  = 1e5;
-int dp[100010];
-// 2D DP
-// Used Weight number of objects
+const string yes = "YES", no = "NO";
+  
+vector<pair<int,ll>> a;
+
+const int W = 1e5 + 10;
+const ll inf = 1e18;
+int n, w;
+
+// 200ms
 void solve(){
-  int n, W;
-  cin >> n >> W;
-  forn(i,n){
-    int w, v;
-    cin >> w >> v;
-    for (int wa = W  - w; wa >= 0 ; wa--){
-      dp[wa + w] = max(dp[wa + w], dp[wa] + v);
+  ll dp[n + 1][W];
+  memset(dp, -1, sizeof dp);
+  function<ll(int, int)> go = [&](int i, int j){
+    if (j > w) return -inf;
+    if (i == n) return 0ll;
+    auto &x = dp[i][j];
+    if (x != -1) return x;
+    return x = max(go(i + 1, j), go(i + 1, j + a[i].first) + a[i].second);
+  }; 
+
+  cout << go(0,0) << endl;
+}
+// 7ms
+void solve2(){
+  // Iterative
+  // Go over m
+  sort(a.begin(), a.end());
+  vector<ll> dp(w + 10, -1);
+  dp[0] = 0;
+  int mx = 0;
+  for (int i = 0;i < n; i++){
+    for (int j = min(mx, w); j>=0; j--){
+      if (a[i].first + j <= w){
+        dp[a[i].first + j] = max(dp[a[i].first + j], dp[j] + a[i].second);
+      }
     }
+    mx += a[i].first; 
   }
-  int ans = 0 ;
-  for (int i = 0; i <= W; i++){
-    ans = max(ans, dp[i]);
+  ll ans = 0;
+  for (int i =0 ;i <= w; i++){
+    ans = max(dp[i], ans);  
   }
-  cout << ans << endl;
+  cout << ans << '\n';
+  
 }
 
-int32_t main() {
-  fastInp;
+int main() {
+  cin.tie(0); cout.tie(0); ios_base::sync_with_stdio(0);
+
   #if LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
   #endif
 
-  int tc = 1;
-  // cin >> tc;
-
-  for (int t = 1; t <= tc; t++){
-    // cout << "Case #" << t << ": ";
-    solve();
+  cin >> n >>  w;
+  for (int i =0;i < n; i++){
+    int x, y; cin >> x >> y;
+    a.push_back({x, y});
   }
-  return 0;
+  solve2();
 }

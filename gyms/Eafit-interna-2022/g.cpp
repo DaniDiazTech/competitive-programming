@@ -38,8 +38,9 @@ int go(int i, int sum, int five, int two){
   return f;
 }
 
-void solve(){
+void solve(int b){
   memset(dp, -1, sizeof dp);
+  n = b;
 
   for (int k =0 ; k <= 9; k++){
     for (int fives = 0; fives <= 1; fives++){
@@ -51,7 +52,6 @@ void solve(){
     }
   }
 
-  cin >> n;
   int ans = inf;
 
   // Setteamos cantidad de 5 y de 2
@@ -59,16 +59,13 @@ void solve(){
     for (int j = 0; j <= 4 * n; j++){
       int mx  = - 1;
       for (int k =0 ; k <= 9; k++){
-        mx = go(0, k, i, j);
-      }
-      if (i + j + mx < ans){
-        cout << i << " " << j << " " << mx << endl;
+        mx = max(go(0, k, i, j), mx);
       }
       ans = min(ans, i + j + mx);
     }
   }
 
-  cout << ans << endl;
+  cout << ans << "," << endl;
 }
 
 int main() {
@@ -79,10 +76,58 @@ int main() {
     freopen("output.txt", "w", stdout);
   #endif
 
-  int tc = 1;
-  // cin >> tc;
-
-  for (int t = 1; t <= tc; t++){
-    solve();
-  }
+  int ans[] = {
+      4,
+      7,
+      11,
+      14,
+      18,
+      21,
+      25,
+      28,
+      32,
+      35,
+      39,
+      42,
+      46,
+      49,
+      53,
+      56,
+      60,
+      63,
+      67,
+      70,
+      74,
+      77,
+      81,
+      84,
+      88,
+      91,
+      95,
+      98,
+      102,
+      105,
+      109,
+      112,
+      116,
+      119,
+      123,
+      126,
+      130,
+      133,
+      137,
+      140,
+      144,
+      147,
+      151,
+      154,
+      158,
+      161,
+      165,
+      168,
+      172,
+      175 
+  };
+  int n; cin >> n;
+  cout << ans[n - 1] << endl;
 }
