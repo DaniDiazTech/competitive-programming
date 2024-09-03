@@ -7,31 +7,28 @@ using namespace std;
 const int mod = 1e9 + 7;
 const string yes = "YES", no = "NO";
 
-const int N = 2e5 + 100;
-
 void solve(){
   int n;
   cin >> n;
-  vector<ll> a(N + 10), p(N + 10);
-  for (int i = 1;i <= n; i++){
-    cin >> a[i];
+  vector<ll> a;
+  for (int i =0;i < n; i++){
+    ll x; cin >> x;
+    a.push_back(x);
   }
-  bitset<N + 10> dp;
-  dp[1] = 1;
-  for (int i = 1; i <= 2 * n; i++){
-    p[i] = a[i] + p[i - 1];
-  } 
-  ll ans = 0;
-  for (int i = 1;i <= n;i++){
-    // Eliminates ith bit (sets ith bit to zero)
-    // Then returns to previous state and runs a[i] shifts
-    dp |= (dp >> i << i + a[i]);
+  if (n < 3){
+    a.push_back(0);
+    a.push_back(0);
   }
-  for (int i = 1; i < N; i++){
-    if (dp[i]){
-      ans = max(ans, p[i] - i + 1);
+  int m=a.size();
+  ll ans  = 0;
+  for (int i = 0;i < m; i++){
+    for (int j = i+ 1; j < m; j++){
+      for (int k = j + 1; k < m; k++){
+        ans  = max(ans, a[i] | a[j] | a[k]);
+      }
     }
   }
+
   cout << ans << endl;
 }
 
